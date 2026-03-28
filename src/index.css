@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-orange: #F25912;
+  --color-primary-blue: #355872;
+  
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+}
+
+@layer base {
+  :root {
+    --background: 255 255 255;
+    --foreground: 53 88 114;
+    --accent: 53 88 114;
+  }
+
+  .dark {
+    --background: 0 0 0;
+    --foreground: 242 89 18;
+    --accent: 242 89 18;
+  }
+
+  body {
+    @apply bg-[rgb(var(--background))] text-[rgb(var(--foreground))] transition-colors duration-500;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply backdrop-blur-md bg-white/10 border border-white/20;
+  }
+  
+  .dark .glass {
+    @apply backdrop-blur-md bg-black/30 border border-white/10;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+}
