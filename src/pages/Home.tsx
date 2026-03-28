@@ -11,7 +11,7 @@ export const Home: React.FC = () => {
         className="relative w-full max-w-lg aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10 glass"
       >
         <img
-          src="https://picsum.photos/seed/bilal/1200/900"
+          src="https://www.youtube.com/c/WACofficiel/about"
           alt="Bilal Nainia"
           className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
           referrerPolicy="no-referrer"
