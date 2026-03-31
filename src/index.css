@@ -13,11 +13,12 @@
     --background: 255 255 255;
     --foreground: 53 88 114;
     --accent: 53 88 114;
+    
   }
 
   .dark {
     --background: 0 0 0;
-    --foreground: 242 89 18;
+    --foreground: 255 255 255;
     --accent: 242 89 18;
   }
 
