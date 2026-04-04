@@ -28,7 +28,7 @@ export const Navbar: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
   const [open, setOpen] = useState(false);
-  const [scrollDir, setScrollDir] = useState("up"); // up or down
+  const [scrollDir, setScrollDir] = useState("up"); 
   const [lastScroll, setLastScroll] = useState(0);
 
   // Smooth hide/show navbar on scroll
@@ -46,12 +46,18 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScroll]);
 
+  const toggleColor = theme === 'dark' ? 'text-orange-400' : 'text-primary-blue';
+
   return (
     <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: scrollDir === "down" ? -120 : 0 }}
+      initial={{ y: -120, opacity: 0 }}
+      animate={{ 
+        y: scrollDir === "down" ? -120 : 0, 
+        opacity: scrollDir === "down" ? 0.7 : 1,
+        boxShadow: scrollDir === "down" ? "0px 10px 20px rgba(0,0,0,0.2)" : "0px 15px 25px rgba(0,0,0,0.3)"
+      }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
-      className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-2xl"
+      className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-2xl backdrop-blur-md rounded-full"
     >
       <div className="glass rounded-full px-6 py-3 flex items-center justify-between shadow-lg">
 
@@ -59,8 +65,8 @@ export const Navbar: React.FC = () => {
         <Link
           to="/"
           className={cn(
-            "font-bold text-lg md:text-xl",
-            theme === 'dark' ? "text-orange-400" : "text-primary-blue"
+            "font-bold text-lg md:text-xl transition-all duration-300",
+            toggleColor
           )}
         >
           Bilal.N
@@ -89,10 +95,8 @@ export const Navbar: React.FC = () => {
           ))}
         </ul>
 
-        {/* RIGHT SIDE */}
-        <div className="ml-auto flex items-center gap-2">
-
-          {/* THEME TOGGLE */}
+        {/* DESKTOP THEME TOGGLE */}
+        <div className="hidden md:flex items-center">
           <button
             onClick={toggleTheme}
             className="p-2 rounded-full hover:bg-white/10 transition-colors"
@@ -102,32 +106,28 @@ export const Navbar: React.FC = () => {
               transition={{ type: "spring", stiffness: 200, damping: 10 }}
             >
               {theme === 'dark' ? (
-                <Sun className="w-5 h-5 text-orange-400" />
+                <Sun className={cn("w-5 h-5", toggleColor)} />
               ) : (
-                <Moon className="w-5 h-5 text-primary-blue" />
+                <Moon className={cn("w-5 h-5", toggleColor)} />
               )}
             </motion.div>
           </button>
+        </div>
 
-          {/* BURGER TOGGLE */}
+        {/* BURGER TOGGLE */}
+        <div className="md:hidden">
           <button
             onClick={() => setOpen(!open)}
-            className="md:hidden p-2"
+            className="p-2"
           >
             <motion.div
               animate={{ rotate: open ? 90 : 0 }}
               transition={{ duration: 0.2 }}
             >
               {open ? (
-                <X className={cn(
-                  "w-5 h-5",
-                  theme === 'dark' ? "text-orange-400" : "text-primary-blue"
-                )} />
+                <X className={cn("w-5 h-5", toggleColor)} />
               ) : (
-                <Menu className={cn(
-                  "w-5 h-5",
-                  theme === 'dark' ? "text-orange-400" : "text-primary-blue"
-                )} />
+                <Menu className={cn("w-5 h-5", toggleColor)} />
               )}
             </motion.div>
           </button>
@@ -144,6 +144,19 @@ export const Navbar: React.FC = () => {
             exit="closed"
             className="absolute top-20 left-1/2 -translate-x-1/2 w-full glass rounded-2xl p-6 flex flex-col items-center gap-6 md:hidden shadow-xl"
           >
+            {/* LOGO */}
+            <Link
+              to="/"
+              onClick={() => setOpen(false)}
+              className={cn(
+                "font-bold text-xl transition-all duration-300",
+                toggleColor
+              )}
+            >
+              Bilal.N
+            </Link>
+
+            {/* NAV LINKS */}
             {navItems.map(item => (
               <motion.div key={item.path} variants={itemVariants}>
                 <Link
@@ -158,6 +171,23 @@ export const Navbar: React.FC = () => {
                 </Link>
               </motion.div>
             ))}
+
+            {/* THEME TOGGLE INSIDE MOBILE MENU */}
+            <button
+              onClick={toggleTheme}
+              className="mt-2 p-2 rounded-full hover:bg-white/10 transition-colors"
+            >
+              <motion.div
+                animate={{ rotate: theme === 'dark' ? 180 : 0 }}
+                transition={{ type: "spring", stiffness: 200, damping: 10 }}
+              >
+                {theme === 'dark' ? (
+                  <Sun className={cn("w-6 h-6", toggleColor)} />
+                ) : (
+                  <Moon className={cn("w-6 h-6", toggleColor)} />
+                )}
+              </motion.div>
+            </button>
           </motion.div>
         )}
       </AnimatePresence>
