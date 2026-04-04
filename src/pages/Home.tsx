@@ -8,7 +8,7 @@ export const Home: React.FC = () => {
         initial={{ opacity: 0, scale: 0.9, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut" }}
-        className="relative w-full max-w-lg aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10 glass"
+        className="relative w-full max-w-xs aspect-square rounded-full overflow-hidden shadow-2xl border-4 border-white/10 glass"
       >
         <img
           src="https://www.youtube.com/c/WACofficiel/about"
@@ -46,16 +46,7 @@ export const Home: React.FC = () => {
         </motion.p>
       </div>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 2 }}
-        className="absolute bottom-10 animate-bounce opacity-40"
-      >
-        <div className="w-6 h-10 border-2 border-current rounded-full flex justify-center pt-2">
-          <div className="w-1 h-2 bg-current rounded-full" />
-        </div>
-      </motion.div>
+
     </div>
   );
 };

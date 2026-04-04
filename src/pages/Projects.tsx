@@ -109,14 +109,14 @@ export const Projects: React.FC = () => {
             className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/80 backdrop-blur-sm"
             onClick={() => setSelectedProject(null)}
           >
-            <motion.div
+              <motion.div
               initial={{ scale: 0.9, y: 20, opacity: 0 }}
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.9, y: 20, opacity: 0 }}
-              className="glass max-w-3xl w-full rounded-[40px] overflow-hidden shadow-2xl"
+              className="glass max-w-lg w-full rounded-2xl overflow-hidden shadow-lg translate-y-8 md:translate-y-12"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="relative aspect-video">
+              <div className="relative h-40 md:h-48 overflow-hidden">
                 <img
                   src={selectedProject.image}
                   alt={selectedProject.title}
@@ -130,17 +130,17 @@ export const Projects: React.FC = () => {
                   <X className="w-6 h-6" />
                 </button>
               </div>
-              <div className="p-10 space-y-6">
-                <h3 className="text-4xl font-bold tracking-tighter uppercase">{selectedProject.title}</h3>
-                <p className="text-xl opacity-70 leading-relaxed">
+              <div className="p-6 space-y-4">
+                <h3 className="text-3xl font-bold tracking-tighter uppercase">{selectedProject.title}</h3>
+                <p className="text-lg opacity-70">
                   {selectedProject.description}
                 </p>
-                <div className="pt-6">
+                <div className="pt-4">
                   <a
                     href={selectedProject.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-primary-orange text-white font-bold hover:scale-105 transition-transform"
+                    className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-primary-orange text-white font-bold text-base hover:scale-105 transition-transform"
                   >
                     Visit Website
                     <ExternalLink className="w-5 h-5" />
